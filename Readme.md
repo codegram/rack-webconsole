@@ -1,31 +1,52 @@
-#rack_webconsole
+#rack-webconsole
 
-Rack-webconsole is a lightweight gem aimed at saving the world.
+Rack-webconsole is a Rack-based interactive console (à la IRB) in your web
+application's frontend. That means you can interact with your application's=
+backend from within the browser itself!
+
+Rack-webconsole is a Rack middleware designed to be unobtrusive. With Rails 3,
+for example, you only have to include the gem in your Gemfile and it already
+works. Without any configuration.
 
 ##Install
 
-    $ gem install rack_webconsole
+In your Gemfile:
 
-Or in your Gemfile:
+    gem 'rack-webconsole'
 
-    gem 'rack_webconsole'
+##Usage with Rails 3
 
-##Usage
+If you are using Rails 3, you have no further steps to do. It works! To give
+it a try, fire up the Rails server and go to any page, press the `\`` key and
+the console will show :)
 
-(usage instructions)
+##Usage with Sinatra
+
+With Sinatra you have to tell your application to use the middleware:
+
+````ruby
+require 'sinatra'
+
+class MySinatraApp < Sinatra::Application
+  use Rack::Webconsole
+  # . . .
+end
+````
+
+And it works! Fire up the server, go to any page and press the `\`` key.
 
 ##Under the hood
 
 Run the test suite by typing:
 
-    rake spec
+    rake
 
 You can also build the documentation with the following command:
 
     rake docs
 
 ## Note on Patches/Pull Requests
- 
+
 * Fork the project.
 * Make your feature addition or bug fix.
 * Add tests for it. This is important so I don't break it in a
