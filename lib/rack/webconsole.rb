@@ -6,6 +6,10 @@ require 'rack/webconsole/sandbox'
 
 require 'rack/webconsole/railtie' if defined?(Rails)
 
+# Rack is a modular webserver interface written by Christian Neukirchen.
+#
+#   http://github.com/rack/rack
+#
 module Rack
   class Webconsole
 

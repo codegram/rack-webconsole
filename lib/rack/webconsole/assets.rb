@@ -13,22 +13,20 @@ module Rack
         status, headers, response = @app.call(env)
 
         if status == 200 &&
-          response.respond_to?(:body) &&
-          !response.body.frozen? &&
           check_html?(headers, response) then
 
-          # Inject the html, css and js code to the view
-          if response.body.respond_to?(:each)
-            response_body = response.body.first
-          else
+          if response.respond_to?(:body)
             response_body = response.body
+          else
+            response_body = response.first
           end
 
+          # Inject the html, css and js code to the view
           response_body.gsub!('</body>', "#{code}</body>")
-          headers['Content-Length'] = response_body.length.to_s
+          headers['Content-Length'] = (response_body.length + 2).to_s
         end
 
-        response_body ||= response.body
+        response_body ||= response.first
 
         [status, headers, [response_body]]
       end
@@ -40,9 +38,10 @@ module Rack
       private
 
       def check_html?(headers, response)
+        body = response.respond_to?(:body) ? response.body : response.first
         headers['Content-Type'] and
           headers['Content-Type'].include? 'text/html' and
-          response.body =~ %r{<html.*</html>}m
+          body =~ %r{<html.*</html>}m
       end
     end
   end
