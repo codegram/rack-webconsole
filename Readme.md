@@ -20,14 +20,22 @@ If you are using Rails 3, you have no further steps to do. It works! To give
 it a try, fire up the Rails server and go to any page, press the `\`` key and
 the console will show :)
 
-##Usage with Sinatra
+##Usage with Sinatra/Padrino
 
-With Sinatra you have to tell your application to use the middleware:
+With Sinatra and Padrino you have to tell your application to use the
+middleware:
 
 ````ruby
 require 'sinatra'
 
 class MySinatraApp < Sinatra::Application
+  use Rack::Webconsole
+  # . . .
+end
+````
+
+````ruby
+class SamplePadrino < Padrino::Application
   use Rack::Webconsole
   # . . .
 end
@@ -57,3 +65,4 @@ You can also build the documentation with the following command:
 ## Copyright
 
 Copyright (c) 2011 Codegram. See LICENSE for details.
+
