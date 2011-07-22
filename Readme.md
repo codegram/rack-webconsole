@@ -4,6 +4,9 @@ Rack-webconsole is a Rack-based interactive console (à la IRB) in your web
 application's frontend. That means you can interact with your application's=
 backend from within the browser itself!
 
+**WARNING**: first version will be released on July 25th, documentation is
+pending until that date.
+
 To get a clearer idea, you can check out [this video](
 http://youtu.be/yKK5J01Dqts?hd=1) showing a live example :)
 
