@@ -1,0 +1,7 @@
+*.gem
+.bundle
+pkg/*
+graph.png
+.yardoc/*
+doc/*
+coverage/*

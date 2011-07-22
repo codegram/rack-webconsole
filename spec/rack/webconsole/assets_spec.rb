@@ -1,0 +1,58 @@
+require 'spec_helper'
+require 'ostruct'
+
+module Rack
+  describe Webconsole::Assets do
+
+    it 'initializes with an app' do
+      @app = stub
+      @assets = Webconsole::Assets.new(@app)
+
+      @assets.instance_variable_get(:@app).must_equal @app
+    end
+
+    describe "#call" do
+
+      describe 'when the call is not appropriate to inject the view code' do
+        # Different invalid cases
+        [
+          [200, {'Content-Type' => 'text/html'}, Response.new('Whatever')],
+          [200, {'Content-Type' => 'text/plain'}, Response.new('Hello World')],
+          [404, {'Content-Type' => 'text/html'}, Response.new('Hello World')],
+          [404, {'Content-Type' => 'text/html'}, Response.new('Hello, World')],
+
+        ].each do |invalid_response|
+          it 'passes the call untouched' do
+            @app = lambda { |env| invalid_response }
+
+            assets = Webconsole::Assets.new(@app)
+            assets.expects(:inject_code).never
+
+            assets.call({}).last.first.must_equal invalid_response.last.body
+          end
+        end
+      end
+
+      describe 'otherwise' do
+
+        it 'injects the view code before the body ending' do
+
+          valid_html = "<!DOCTYPE html>\n<html>\n<head>\n  <title>Testapp</title>\n  <link href=\"/assets/application.css\" media=\"screen\" rel=\"stylesheet\" type=\"text/css\" />\n  <script src=\"/assets/application.js\" type=\"text/javascript\"></script>\n  <meta content=\"authenticity_token\" name=\"csrf-param\" />\n<meta content=\"26Ls63zdKBiCXoqU5CuG6KqVbeMYydRqOuovP+DXx8g=\" name=\"csrf-token\" />\n</head>\n<body>\n\n<h1> Hello bitches </h1>\n\n<p> Lorem ipsum dolor sit amet. </p>\n\n\n</body>\n</html>\n"
+
+          response = OpenStruct.new({:body => valid_html})
+
+          @app = lambda { |env| [200, {'Content-Type' => 'text/html'}, response] }
+
+          assets = Webconsole::Assets.new(@app)
+          response = assets.call({}).last.first
+
+          response.must_match /input name/m # html
+          response.must_match /text\/css/m # css
+          response.must_match /escapeHTML/m # js
+        end
+
+      end
+    end
+
+  end
+end
