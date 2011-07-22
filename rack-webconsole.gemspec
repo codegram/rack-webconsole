@@ -14,6 +14,7 @@ Gem::Specification.new do |s|
   s.rubyforge_project = "rack-webconsole"
 
   s.add_runtime_dependency 'rack'
+  s.add_runtime_dependency 'json'
 
   s.add_development_dependency 'minitest'
   s.add_development_dependency 'purdytest'

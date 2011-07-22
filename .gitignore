@@ -5,3 +5,4 @@ graph.png
 .yardoc/*
 doc/*
 coverage/*
+*.rbc
