@@ -22,7 +22,7 @@ In your Gemfile:
 ##Usage with Rails 3
 
 If you are using Rails 3, you have no further steps to do. It works! To give
-it a try, fire up the Rails server and go to any page, press the ``` key and
+it a try, fire up the Rails server and go to any page, press the ` ` ` key and
 the console will show :)
 
 ##Usage with Sinatra/Padrino
@@ -46,7 +46,7 @@ class SamplePadrino < Padrino::Application
 end
 ````
 
-And it works! Fire up the server, go to any page and press the ``` key.
+And it works! Fire up the server, go to any page and press the ` ` ` key.
 
 ##Under the hood
 
