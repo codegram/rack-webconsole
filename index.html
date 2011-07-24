@@ -44,21 +44,83 @@
 
     <iframe style="margin:0px auto" width="700" height="510" src="http://www.youtube.com/embed/yKK5J01Dqts?hd=1" frameborder="0" allowfullscreen></iframe>
 
-    <p>Rack-webconsole is a Rack-based interactive console (à la Rails console) in your web application's frontend. That means you can interact with your application's backend from within the browser itself!</p>
 
-    <p>To get a clearer idea, check out the video above :)</p>
+<h2>Resources</h2>
 
-    <p>Rack-webconsole is a Rack middleware designed to be unobtrusive. With Rails 3, for example, you only have to include the gem in your Gemfile and it already works. Without any configuration.</p>
-    
-    <h2>Install</h2>
-    <p>In your Gemfile:
-    <pre>gem 'rack-webconsole'</pre></p>
+<ul>
+<li><a href="http://youtu.be/yKK5J01Dqts?hd=1">Example video</a></li>
+<li><a href="http://rubydoc.info/github/codegram/rack-webconsole">Documentation</a></li>
+</ul>
 
-    <h2>Authors</h2>
-    <p>Josep M. Bach (josep.m.bach@gmail.com)<br/>Josep Jaume Rey (josepjaume@gmail.com)<br/>Oriol Gual (oriol.gual@gmail.com)<br/>      </p>
-    <h2>Contact</h2>
-    <p>Codegram (info@codegram.com)<br/>      </p>
+<h2>Install</h2>
 
+<p>In your Gemfile:</p>
+
+<pre><code>gem 'rack-webconsole'
+</code></pre>
+
+<h2>Usage with Rails 3</h2>
+
+<p>If you are using Rails 3, you have no further steps to do. It works! To give
+it a try, fire up the Rails server and go to any page, press the <code></code> ` key and
+the console will show :)</p>
+
+<h2>Usage with Sinatra/Padrino</h2>
+
+<p>With Sinatra and Padrino you have to tell your application to use the
+middleware:</p>
+
+<pre><code>require 'sinatra'
+require 'rack/webconsole'
+
+class MySinatraApp &lt; Sinatra::Application
+  use Rack::Webconsole
+  # . . .
+end
+
+class SamplePadrino &lt; Padrino::Application
+  use Rack::Webconsole
+  # . . .
+end
+</code></pre>
+
+<p>NOTE: If you are using Bundler and initializing it from config.ru, you don't
+have to <code>require 'rack/webconsole'</code> manually, otherwise you have to.</p>
+
+<p>And it works! Fire up the server, go to any page and press the <code></code> ` key.</p>
+
+<h2>Commands</h2>
+
+<p>In the console you can issue whatever Ruby commands you want, except multiline commands. Local variables are kept, so you can get a more IRB-esque feeling.</p>
+
+<p>To reset all local variables, just issue the <code>reload!</code> command.</p>
+
+<h2>Under the hood</h2>
+
+<p>Run the test suite by typing:</p>
+
+<pre><code>rake
+</code></pre>
+
+<p>You can also build the documentation with the following command:</p>
+
+<pre><code>rake docs
+</code></pre>
+
+<h2>Note on Patches/Pull Requests</h2>
+
+<ul>
+<li>Fork the project.</li>
+<li>Make your feature addition or bug fix.</li>
+<li>Add tests for it. This is important so I don't break it in a
+future version unintentionally.</li>
+<li>Commit, do not mess with rakefile, version, or history. (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)</li>
+<li>Send us a pull request. Bonus points for topic branches.</li>
+</ul>
+
+<h2>Copyright</h2>
+
+<p>Copyright (c) 2011 Codegram. See LICENSE for details.</p>
     <div class="footer">
       get the source code on GitHub : <a href="http://github.com/codegram/rack-webconsole">codegram/rack-webconsole</a>
     </div>
@@ -67,3 +129,4 @@
   
 </body>
 </html>
+
