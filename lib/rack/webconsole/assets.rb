@@ -11,22 +11,17 @@ module Rack
 
       def call(env)
         status, headers, response = @app.call(env)
+        return [status, headers, response] unless check_html?(headers, response) && status == 200
 
-        if status == 200 &&
-          check_html?(headers, response) then
-
-          if response.respond_to?(:body)
-            response_body = response.body
-          else
-            response_body = response.first
-          end
-
-          # Inject the html, css and js code to the view
-          response_body.gsub!('</body>', "#{code}</body>")
-          headers['Content-Length'] = (response_body.length + 2).to_s
+        if response.respond_to?(:body)
+          response_body = response.body
+        else
+          response_body = response.first
         end
 
-        response_body ||= response.first
+        # Inject the html, css and js code to the view
+        response_body.gsub!('</body>', "#{code}</body>")
+        headers['Content-Length'] = (response_body.length + 2).to_s
 
         [status, headers, [response_body]]
       end

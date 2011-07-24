@@ -36,6 +36,8 @@ body {
   bottom: 10px;
 }
 #console form div.input input{
+  margin-top: 0px;
+  margin-bottom: 0px;
   width: 97%;
   font-size: 14px;
   background: #000;
