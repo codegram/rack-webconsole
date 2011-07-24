@@ -1,8 +1,8 @@
 #rack-webconsole
 
-Rack-webconsole is a Rack-based interactive console (à la IRB) in your web
-application's frontend. That means you can interact with your application's=
-backend from within the browser itself!
+Rack-webconsole is a Rack-based interactive console (à la Rails console) in
+your web application's frontend. That means you can interact with your
+application's backend from within the browser itself!
 
 To get a clearer idea, you can check out [this video](
 http://youtu.be/yKK5J01Dqts?hd=1) showing a live example :)
@@ -23,6 +23,7 @@ Tested with MRI 1.9.2 and ruby-head (1.9.3).
 In your Gemfile:
 
     gem 'rack-webconsole'
+
 
 ##Usage with Rails 3
 
@@ -81,4 +82,6 @@ You can also build the documentation with the following command:
 ## Copyright
 
 Copyright (c) 2011 Codegram. See LICENSE for details.
+
+
 
