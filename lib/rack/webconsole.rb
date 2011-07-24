@@ -8,7 +8,7 @@ require 'rack/webconsole/railtie' if defined?(Rails)
 
 # Rack is a modular webserver interface written by Christian Neukirchen.
 #
-#   http://github.com/rack/rack
+# Learn more at: https://github.com/rack/rack
 #
 module Rack
   # {Rack::Webconsole} is a Rack middleware that provides an interactive
