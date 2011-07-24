@@ -1,3 +1,4 @@
+# encoding: utf-8
 module Rack
   class Webconsole
     # Railtie loaded in Rails applications. Its purpose is to automatically use

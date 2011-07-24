@@ -1,5 +1,4 @@
 # encoding: utf-8
-
 module Rack
   class Webconsole
     class Assets
