@@ -14,12 +14,10 @@ YARD::Rake::YardocTask.new(:docs) do |t|
   t.files   = ['lib/**/*.rb']
   t.options = ['-m', 'markdown', '--no-private', '-r', 'Readme.md', '--title', 'rack-webconsole documentation']
 end
-
 task :doc => [:docs]
 
 desc "Generate and open class diagram (needs Graphviz installed)"
 task :graph do |t|
  `bundle exec yard graph -d --full --no-private | dot -Tpng -o graph.png && open graph.png`
 end
-
 task :default => [:test]
