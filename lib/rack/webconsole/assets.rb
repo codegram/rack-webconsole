@@ -1,13 +1,27 @@
 # encoding: utf-8
 module Rack
   class Webconsole
+    # {Assets} is a Rack middleware responsible for injecting view code for the
+    # console to work properly.
+    #
+    # It intercepts HTTP requests, detects successful HTML responses and
+    # injects HTML, CSS and JavaScript code into those.
+    #
     class Assets
       include Webconsole::AssetHelpers
 
+      # Honor the Rack contract by saving the passed Rack application in an ivar.
+      #
+      # @param [Rack::Application] app the previous Rack application in the
+      #   middleware chain.
       def initialize(app)
         @app = app
       end
 
+      # Checks for successful HTML responses and injects HTML, CSS and
+      # JavaScript code into them.
+      #
+      # @param [Hash] env a Rack request environment.
       def call(env)
         status, headers, response = @app.call(env)
         return [status, headers, response] unless check_html?(headers, response) && status == 200
@@ -25,6 +39,10 @@ module Rack
         [status, headers, [response_body]]
       end
 
+      # Returns a string with all the HTML, CSS and JavaScript code needed for
+      # the view.
+      #
+      # @return [String] the injectable code.
       def code
         html_code << css_code << js_code
       end

@@ -4,9 +4,6 @@ Rack-webconsole is a Rack-based interactive console (à la IRB) in your web
 application's frontend. That means you can interact with your application's=
 backend from within the browser itself!
 
-**WARNING**: first version will be released on July 25th, documentation is
-pending until that date.
-
 To get a clearer idea, you can check out [this video](
 http://youtu.be/yKK5J01Dqts?hd=1) showing a live example :)
 
@@ -33,24 +30,21 @@ the console will show :)
 With Sinatra and Padrino you have to tell your application to use the
 middleware:
 
-````ruby
-require 'sinatra'
-# If you are using Bundler and initializing it from config.ru, you don't have
-# to require 'rack/webconsole' manually, otherwise you have to:
-require 'rack/webconsole'
+    require 'sinatra'
+    require 'rack/webconsole'
 
-class MySinatraApp < Sinatra::Application
-  use Rack::Webconsole
-  # . . .
-end
-````
+    class MySinatraApp < Sinatra::Application
+      use Rack::Webconsole
+      # . . .
+    end
 
-````ruby
-class SamplePadrino < Padrino::Application
-  use Rack::Webconsole
-  # . . .
-end
-````
+    class SamplePadrino < Padrino::Application
+      use Rack::Webconsole
+      # . . .
+    end
+
+NOTE: If you are using Bundler and initializing it from config.ru, you don't
+have to `require 'rack/webconsole'` manually, otherwise you have to.
 
 And it works! Fire up the server, go to any page and press the ` ` ` key.
 
@@ -82,6 +76,7 @@ You can also build the documentation with the following command:
 ## Copyright
 
 Copyright (c) 2011 Codegram. See LICENSE for details.
+
 
 
 

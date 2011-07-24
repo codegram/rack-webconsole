@@ -1,7 +1,7 @@
 # encoding: utf-8
 module Rack
   class Webconsole
-    # Helper module to encapsulate the asset loading logic used by the {Asset}
+    # Helper module to encapsulate the asset loading logic used by the {Assets}
     # middleware.
     #
     # For now, the strategy is reading the files from disk. In the future, we
