@@ -13,6 +13,11 @@ works. Without any configuration.
 
 Tested with MRI 1.9.2 and ruby-head (1.9.3).
 
+##Resources
+
+* [Example video](http://youtu.be/yKK5J01Dqts?hd=1)
+* [Documentation](http://rubydoc.info/github/codegram/rack-webconsole)
+
 ##Install
 
 In your Gemfile:
@@ -76,8 +81,4 @@ You can also build the documentation with the following command:
 ## Copyright
 
 Copyright (c) 2011 Codegram. See LICENSE for details.
-
-
-
-
 
