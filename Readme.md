@@ -35,6 +35,9 @@ middleware:
 
 ````ruby
 require 'sinatra'
+# If you are using Bundler and initializing it from config.ru, you don't have
+# to require 'rack/webconsole' manually, otherwise you have to:
+require 'rack/webconsole'
 
 class MySinatraApp < Sinatra::Application
   use Rack::Webconsole
@@ -73,5 +76,6 @@ You can also build the documentation with the following command:
 ## Copyright
 
 Copyright (c) 2011 Codegram. See LICENSE for details.
+
 
 
