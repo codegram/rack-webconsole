@@ -1,7 +1,3 @@
-body {
-  margin:0;
-  padding:0;
-}
 #console {
   opacity: 0.9;
   z-index: 999;
@@ -14,6 +10,8 @@ body {
   position: fixed;
   width: 100%;
   bottom: 0px;
+  left: 0px;
+  right:0px;
   border-top: 3px solid #DEDEDE;
   overflow: hidden;
   padding-top: 10px;
