@@ -10,6 +10,8 @@
   position: fixed;
   width: 100%;
   bottom: 0px;
+  left: 0px;
+  right:0px;
   border-top: 3px solid #DEDEDE;
   overflow: hidden;
   padding-top: 10px;
