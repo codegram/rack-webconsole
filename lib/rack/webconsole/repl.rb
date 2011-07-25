@@ -33,12 +33,13 @@ module Rack
 
         params = req.params
 
-        result = begin
+        stdout , result = begin
           $sandbox ||= Sandbox.new
 
           # Force conversion to symbols due to issues with lovely 1.8.7
           boilerplate = local_variables.map(&:to_sym) + [:ls]
 
+          stdout = capture_output {
           result = $sandbox.instance_eval """
             result = (#{params['query']})
             ls = (local_variables.map(&:to_sym) - [#{boilerplate.join(', ')}])
@@ -48,16 +49,26 @@ module Rack
             end)
             result
           """
+          }
 
-          result.inspect
+          [stdout.string, result.inspect]
         rescue=>e
           "Error: " + e.message
         end
-        response_body = {:result => result}.to_json
+        response_body = {:stdout => stdout, :result => result}.to_json
         headers = {}
         headers['Content-Type'] = 'application/json'
         headers['Content-Length'] = response_body.length.to_s
         [200, headers, [response_body]]
+      end
+
+      def capture_output
+        out = StringIO.new
+        $stdout = out
+        yield
+        return out
+      ensure
+        $stdout = STDOUT
       end
     end
   end

@@ -36,8 +36,9 @@ $("#console form input").keyup(function(event) {
       data: ({query: query}),
       success: function (data) {
         var q = "<div>>> " + query.escapeHTML() + "</div>";
+        var o = "<div style='color:green'>" + data.stdout.escapeHTML().replace(/\n/g,"<br>") + "</div>";
         var r = "<div>=> " + data.result.escapeHTML() + "</div>";
-        $("#console .results").append(q + r);
+        $("#console .results").append(q + o+ r);
         $("#query").val('');
       }
     });
