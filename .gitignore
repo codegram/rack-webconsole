@@ -1,2 +1,7 @@
 .yardoc/*
 doc/*
+coverage/*
+lib/*
+pkg/*
+*.rbc
+spec/*
