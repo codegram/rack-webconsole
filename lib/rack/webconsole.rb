@@ -24,6 +24,24 @@ module Rack
   # variables and giving a true IRB-esque experience.
   #
   class Webconsole
+    @@inject_jquery = false
+
+    class << self
+      # Returns whether the Asset injecter must inject JQuery or not.
+      #
+      # @return [Boolean] whether to inject JQuery or not.
+      def inject_jquery
+        @@inject_jquery
+      end
+
+      # Sets whether the Asset injecter must inject JQuery or not.
+      #
+      # @param [Boolean] value whether to inject JQuery or not.
+      def inject_jquery=(value)
+        @@inject_jquery = value
+      end
+    end
+
     # Honor the Rack contract by saving the passed Rack application in an ivar.
     #
     # @param [Rack::Application] app the previous Rack application in the

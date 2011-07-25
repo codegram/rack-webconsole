@@ -16,7 +16,10 @@ module Rack
       #
       # @return [String] the injectable HTML.
       def html_code
-        asset 'webconsole.html'
+        out = ""
+        out << asset('jquery.html') if Webconsole.inject_jquery
+        out << asset('webconsole.html')
+        out
       end
 
       # Loads the CSS from a file in `/public`.

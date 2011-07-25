@@ -36,5 +36,12 @@ module Rack
       end
     end
 
+    describe 'class methods' do
+      it '#inject_jquery accessors' do
+        Webconsole.inject_jquery.must_equal false
+        Webconsole.inject_jquery = true
+        Webconsole.inject_jquery.must_equal true
+      end
+    end
   end
 end

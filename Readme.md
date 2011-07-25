@@ -25,6 +25,13 @@ In your Gemfile:
 
     gem 'rack-webconsole'
 
+Rack-webconsole **needs JQuery**. If you are using Rails 3, JQuery is loaded by
+default. In case you don't want to use JQuery in your application,
+**rack-webconsole can inject it for you** only when it needs it. To do that you
+should put this line somewhere in your application (a Rails initializer, or
+some configuration file):
+
+    Webconsole.inject_jquery = true
 
 ##Usage with Rails 3
 
@@ -55,6 +62,7 @@ have to `require 'rack/webconsole'` manually, otherwise you have to.
 
 And it works! Fire up the server, go to any page and press the ` ` ` key.
 
+
 ##Commands
 
 In the console you can issue whatever Ruby commands you want, except multiline commands. Local variables are kept, so you can get a more IRB-esque feeling.
@@ -83,3 +91,4 @@ You can also build the documentation with the following command:
 ## Copyright
 
 Copyright (c) 2011 Codegram. See LICENSE for details.
+
