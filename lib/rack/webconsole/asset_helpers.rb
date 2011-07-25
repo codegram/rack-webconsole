@@ -47,7 +47,8 @@ module Rack
       private
 
       def asset(file)
-        ::File.read(::File.join(::File.dirname(__FILE__), '..', '..', '..', 'public', file))
+        @assets ||= {}
+        @assets[file] ||= ::File.read(::File.join(::File.dirname(__FILE__), '..', '..', '..', 'public', file))
       end
     end
   end
