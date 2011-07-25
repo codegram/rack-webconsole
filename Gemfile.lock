@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rack-webconsole (0.0.4)
+    rack-webconsole (0.0.5)
       json
       rack
 

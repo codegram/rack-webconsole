@@ -32,8 +32,12 @@ module Rack
           response_body = response.first
         end
 
+        # Regenerate the security token
+        Webconsole::Repl.reset_token
+
         # Inject the html, css and js code to the view
         response_body.gsub!('</body>', "#{code}</body>")
+
         headers['Content-Length'] = (response_body.length + 2).to_s
 
         [status, headers, [response_body]]
@@ -42,9 +46,14 @@ module Rack
       # Returns a string with all the HTML, CSS and JavaScript code needed for
       # the view.
       #
+      # It puts the security token inside the JavaScript to make AJAX calls
+      # secure.
+      #
       # @return [String] the injectable code.
       def code
-        html_code << css_code << js_code
+        html_code <<
+          css_code <<
+          js_code.gsub('TOKEN', Webconsole::Repl.token)
       end
 
       private

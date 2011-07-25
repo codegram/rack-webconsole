@@ -14,10 +14,14 @@ works. Without any configuration.
 
 Tested with MRI versions 1.8.7, 1.9.2, ruby-head, and JRuby 1.6.3.
 
+**SECURITY NOTE**: From version v0.0.5 rack-webconsole uses a token system to
+protect against cross-site request forgery.
+
 ##Resources
 
 * [Example video](http://youtu.be/yKK5J01Dqts?hd=1)
 * [Documentation](http://rubydoc.info/github/codegram/rack-webconsole)
+
 
 ##Install
 
@@ -32,7 +36,6 @@ should put this line somewhere in your application (a Rails initializer, or
 some configuration file):
 
     Rack::Webconsole.inject_jquery = true
-
 
 ##Usage with Rails 3
 
@@ -92,5 +95,6 @@ You can also build the documentation with the following command:
 ## Copyright
 
 Copyright (c) 2011 Codegram. See LICENSE for details.
+
 
 

@@ -33,7 +33,7 @@ $("#console form input").keyup(function(event) {
       url: '/webconsole',
       type: 'POST',
       dataType: 'json',
-      data: ({query: query}),
+      data: ({query: query, token: "TOKEN"}),
       success: function (data) {
         var q = "<div>>> " + query.escapeHTML() + "</div>";
         var r = "<div>=> " + data.result.escapeHTML() + "</div>";
