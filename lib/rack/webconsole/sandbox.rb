@@ -10,7 +10,7 @@ module Rack
       # method missing behavior.
       def method_missing(method, *args, &block)
         @locals ||= {}
-        @locals[method] || super(method, *args, &block)
+        @locals[method.to_sym] || super(method, *args, &block)
       end
 
       # Makes the console use a fresh, new {Sandbox} with all local variables

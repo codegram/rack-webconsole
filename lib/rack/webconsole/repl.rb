@@ -36,11 +36,12 @@ module Rack
         result = begin
           $sandbox ||= Sandbox.new
 
-          boilerplate = local_variables + [:ls]
+          # Force conversion to symbols due to issues with lovely 1.8.7
+          boilerplate = local_variables.map(&:to_sym) + [:ls]
 
           result = $sandbox.instance_eval """
             result = (#{params['query']})
-            ls = (local_variables - #{boilerplate})
+            ls = (local_variables.map(&:to_sym) - [#{boilerplate.join(', ')}])
             @locals ||= {}
             @locals.update(ls.inject({}) do |hash, value|
               hash.update({value => eval(value.to_s)})
