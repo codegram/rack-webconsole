@@ -59,6 +59,15 @@
 <pre><code>gem 'rack-webconsole'
 </code></pre>
 
+<p>Rack-webconsole <strong>needs JQuery</strong>. If you are using Rails 3,
+JQuery is loaded by default. In case you don't want to use JQuery in your
+application, <strong>rack-webconsole can inject it for you</strong> only when
+it needs it. To do that you should put this line somewhere in your application
+(a Rails initializer, or some configuration file):
+
+<pre><code>Webconsole.inject_jquery = true
+</code></pre>
+
 <h2>Usage with Rails 3</h2>
 
 <p>If you are using Rails 3, you have no further steps to do. It works! To give
@@ -126,7 +135,7 @@ future version unintentionally.</li>
     </div>
 
   </div>
-  
+
 </body>
 </html>
 
