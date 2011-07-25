@@ -5,6 +5,9 @@ $(document).ready(function() {
       $("#rack-webconsole").slideToggle('fast', function() {
         if ($(this).is(':visible')) {
           $("#rack-webconsole form input").focus();
+          $("#rack-webconsole .results_wrapper").scrollTop(
+            $("#rack-webconsole .results").height()
+            );
         } else {
           $("#rack-webconsole form input").blur();
         }
@@ -35,9 +38,12 @@ $("#rack-webconsole form input").keyup(function(event) {
       dataType: 'json',
       data: ({query: query, token: "TOKEN"}),
       success: function (data) {
-        var q = "<div>>> " + query.escapeHTML() + "</div>";
-        var r = "<div>=> " + data.result.escapeHTML() + "</div>";
+        var q = "<div class='query'>>> " + query.escapeHTML() + "</div>";
+        var r = "<div class='result'>=> " + data.result.escapeHTML() + "</div>";
         $("#rack-webconsole .results").append(q + r);
+        $("#rack-webconsole .results_wrapper").scrollTop(
+          $("#rack-webconsole .results").height()
+          );
         $("#query").val('');
       }
     });
