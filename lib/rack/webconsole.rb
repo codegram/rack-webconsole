@@ -4,7 +4,7 @@ require 'rack/webconsole/asset_helpers'
 require 'rack/webconsole/assets'
 require 'rack/webconsole/sandbox'
 
-require 'rack/webconsole/railtie' if defined?(Rails)
+require 'rack/webconsole/railtie' if defined?(Rails::Railtie)
 
 # Rack is a modular webserver interface written by Christian Neukirchen.
 #
