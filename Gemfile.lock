@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rack-webconsole (0.0.1)
+    rack-webconsole (0.0.2)
       json
       rack
 
@@ -10,7 +10,6 @@ GEM
   specs:
     bluecloth (2.1.0)
     json (1.5.3)
-    json (1.5.3-java)
     minitest (2.3.1)
     mocha (0.9.12)
     purdytest (1.0.0)
