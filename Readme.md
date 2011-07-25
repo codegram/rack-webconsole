@@ -31,7 +31,8 @@ default. In case you don't want to use JQuery in your application,
 should put this line somewhere in your application (a Rails initializer, or
 some configuration file):
 
-    Webconsole.inject_jquery = true
+    Rack::Webconsole.inject_jquery = true
+
 
 ##Usage with Rails 3
 
@@ -91,4 +92,5 @@ You can also build the documentation with the following command:
 ## Copyright
 
 Copyright (c) 2011 Codegram. See LICENSE for details.
+
 
