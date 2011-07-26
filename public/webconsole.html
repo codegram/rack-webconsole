@@ -1,11 +1,15 @@
 <div id="rack-webconsole">
   <form accept-charset="UTF-8" action="/webconsole" method="post">
     <input name="utf8" type="hidden" value="✓"/>
-    <div class="results">
+    <div class="results_wrapper">
+      <div class="results">
+      </div>
     </div>
     <div class="input">
-      <span>>></span>
-      <input id="query" name="query" type="text" />
+      <span class="prompt">>></span>
+      <span class="input_box">
+        <input id="query" name="query" type="text" />
+      </div>
     </div>
   </form>
 </div>
