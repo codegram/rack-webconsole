@@ -4,42 +4,80 @@
   background: #000;
   color: #DDD;
   font-family: monospace;
-  padding-left: 15px;
-  padding-top: 10px;
-  height: 25%;
+  height: 40%;
   position: fixed;
   width: 100%;
   bottom: 0px;
   left: 0px;
   right:0px;
-  border-top: 3px solid #DEDEDE;
-  overflow: hidden;
+  outline-top: 3px solid #DEDEDE;
+  box-shadow: 0px -4px 5px rgba(0,0,0,0.5);
+  -moz-box-shadow: 0px -4px 5px rgba(0,0,0,0.5);
+  -webkit-box-shadow: 0px -4px 5px rgba(0,0,0,0.5);
+  font-size: 11px;
+}
+#rack-webconsole div.query{
+  margin-top: 10px;
+  font-weight: bold;
   padding-top: 10px;
+  border-top: 1px dashed #333;
+  margin-bottom: 5px;
+}
+#rack-webconsole div.query:first-child{
+  margin-top: 0px;
+  padding-top: 0px;
+  border-top: none;
+}
+#rack-webconsole div.result{
+  font-weight: normal;
 }
 #rack-webconsole form div, #console form span {
   font-size: 14px;
-  background: #000;
   border: 0px;
   font-family: monospace;
   color: #FFF;
+}
+#rack-webconsole form div.results_wrapper{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  overflow-x: auto;
 }
 #rack-webconsole form div.results{
-  position: absolute;
-  bottom: 40px;
-  margin-bottom: -10px;
+  padding: 10px;
+  padding-bottom: 40px;
+}
+#rack-webconsole .prompt{
+  width: 30px;
+  text-align: center;
+  display: block;
+  float: left;
+  height: 25px;
+  line-height: 25px;
 }
 #rack-webconsole form div.input{
-  width: 97%;
+  width: 100%;
   position: absolute;
-  bottom: 10px;
+  bottom: 0px;
+  height: 30px;
+  padding-top: 10px;
+  background: #000;
 }
 #rack-webconsole form div.input input{
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
   margin-top: 0px;
   margin-bottom: 0px;
-  width: 97%;
+  width: 100%;
   font-size: 14px;
-  background: #000;
+  background: transparent;
   border: 0px;
   font-family: monospace;
   color: #FFF;
+}
+#rack-webconsole .input .input_box{
+  margin-left: 30px;
+  margin-right: 10px;
+  display: block;
 }

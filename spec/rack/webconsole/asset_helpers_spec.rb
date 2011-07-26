@@ -34,7 +34,7 @@ module Rack
         asset_class = AssetClass.new
         js = asset_class.js_code
 
-        js.must_match /\$\("#console"\)/
+        js.must_match /\$\("#rack-webconsole"\)/
         js.must_match /escapeHTML/
       end
     end
