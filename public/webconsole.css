@@ -1,4 +1,4 @@
-#console {
+#rack-webconsole {
   opacity: 0.9;
   z-index: 999;
   background: #000;
@@ -16,24 +16,24 @@
   overflow: hidden;
   padding-top: 10px;
 }
-#console form div, #console form span {
+#rack-webconsole form div, #console form span {
   font-size: 14px;
   background: #000;
   border: 0px;
   font-family: monospace;
   color: #FFF;
 }
-#console form div.results{
+#rack-webconsole form div.results{
   position: absolute;
   bottom: 40px;
   margin-bottom: -10px;
 }
-#console form div.input{
+#rack-webconsole form div.input{
   width: 97%;
   position: absolute;
   bottom: 10px;
 }
-#console form div.input input{
+#rack-webconsole form div.input input{
   margin-top: 0px;
   margin-bottom: 0px;
   width: 97%;
