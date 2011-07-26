@@ -1,19 +1,19 @@
 $(document).ready(function() {
-  $("#console").hide();
+  $("#rack-webconsole").hide();
   $(this).keypress(function(event) {
     if (event.which == 96) {
-      $("#console").slideToggle('fast', function() {
+      $("#rack-webconsole").slideToggle('fast', function() {
         if ($(this).is(':visible')) {
-          $("#console form input").focus();
+          $("#rack-webconsole form input").focus();
         } else {
-          $("#console form input").blur();
+          $("#rack-webconsole form input").blur();
         }
       });
       event.preventDefault();
     }
   });
 });
-$('#console form').submit(function(e){
+$('#rack-webconsole form').submit(function(e){
     e.preventDefault();
 });
 String.prototype.escapeHTML = function () {
@@ -25,9 +25,9 @@ String.prototype.escapeHTML = function () {
     );
 };
 
-$("#console form input").keyup(function(event) {
+$("#rack-webconsole form input").keyup(function(event) {
   if(event.which == 13) {
-    /*$.post('/webconsole', $("#console form").serialize());*/
+    /*$.post('/webconsole', $("#rack-webconsole form").serialize());*/
     var query = $("#query").val();
     $.ajax({
       url: '/webconsole',
@@ -37,7 +37,7 @@ $("#console form input").keyup(function(event) {
       success: function (data) {
         var q = "<div>>> " + query.escapeHTML() + "</div>";
         var r = "<div>=> " + data.result.escapeHTML() + "</div>";
-        $("#console .results").append(q + r);
+        $("#rack-webconsole .results").append(q + r);
         $("#query").val('');
       }
     });
