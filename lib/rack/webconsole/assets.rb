@@ -41,7 +41,7 @@ module Rack
         # Inject the html, css and js code to the view
         response_body.gsub!('</body>', "#{code}</body>")
 
-        headers['Content-Length'] = (response_body.length + 2).to_s
+        headers['Content-Length'] = response_body.bytesize.to_s
 
         [status, headers, [response_body]]
       end
