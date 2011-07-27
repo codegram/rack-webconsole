@@ -1,0 +1,9 @@
+=== 0.1.0 / 2011-07-27
+
+  + The request object is now exposed in the console through #request method
+  + Various UI enhancements
+  ! Fix bug where Sandbox locals were much more than those defined by the user.
+
+=== 0.0.5 / 2011-07-26
+
+  ! Protection against CSRF attacks.
