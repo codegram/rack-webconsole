@@ -75,7 +75,7 @@ module Rack
 
           result = $sandbox.instance_eval """
             result = (#{params['query']})
-            ls = (local_variables.map(&:to_sym) - [#{boilerplate.join(', ')}])
+            ls = (local_variables.map(&:to_sym) - [#{boilerplate.map(&:inspect).join(', ')}])
             @locals ||= {}
             @locals.update(ls.inject({}) do |hash, value|
               hash.update({value => eval(value.to_s)})
