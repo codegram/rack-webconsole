@@ -90,7 +90,7 @@ module Rack
         response_body = {:result => result}.to_json
         headers = {}
         headers['Content-Type'] = 'application/json'
-        headers['Content-Length'] = response_body.length.to_s
+        headers['Content-Length'] = response_body.bytesize.to_s
         [200, headers, [response_body]]
       end
 
