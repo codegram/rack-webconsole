@@ -36,5 +36,15 @@ module Rack
       end
     end
 
+    describe "request" do
+      it 'returns the request object' do
+        @sandbox = Webconsole::Sandbox.new
+        request = Rack::Request.new({'PATH_INFO' => '/some_path'})
+        Webconsole::Repl.request = request
+
+        @sandbox.request.must_equal request
+      end
+    end
+
   end
 end

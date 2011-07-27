@@ -21,6 +21,10 @@ module Rack
         $sandbox = Sandbox.new
         'ok'
       end
+
+      def request
+        Webconsole::Repl.request
+      end
     end
   end
 end

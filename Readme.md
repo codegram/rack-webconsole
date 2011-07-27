@@ -71,7 +71,8 @@ And it works! Fire up the server, go to any page and press the ` ` ` key.
 
 In the console you can issue whatever Ruby commands you want, except multiline commands. Local variables are kept, so you can get a more IRB-esque feeling.
 
-To reset all local variables, just issue the `reload!` command.
+* `reload!` resets all local variables
+* `request` returns the current page request object
 
 ##Under the hood
 
@@ -95,6 +96,3 @@ You can also build the documentation with the following command:
 ## Copyright
 
 Copyright (c) 2011 Codegram. See LICENSE for details.
-
-
-

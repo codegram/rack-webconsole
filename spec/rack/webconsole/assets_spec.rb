@@ -67,6 +67,19 @@ module Rack
           response.must_match /escapeHTML/m # js
         end
 
+        it 'exposes the request object to the console' do
+          valid_html = "<!DOCTYPE html>\n<html>\n<head>\n  <title>Testapp</title>\n  <link href=\"/assets/application.css\" media=\"screen\" rel=\"stylesheet\" type=\"text/css\" />\n  <script src=\"/assets/application.js\" type=\"text/javascript\"></script>\n  <meta content=\"authenticity_token\" name=\"csrf-param\" />\n<meta content=\"26Ls63zdKBiCXoqU5CuG6KqVbeMYydRqOuovP+DXx8g=\" name=\"csrf-token\" />\n</head>\n<body>\n\n<h1> Hello bitches </h1>\n\n<p> Lorem ipsum dolor sit amet. </p>\n\n\n</body>\n</html>\n"
+
+          @app = lambda { |env| [200, {'Content-Type' => 'text/html'}, OpenStruct.new({:body => valid_html})] }
+
+          env = {'PATH_INFO' => '/some_path'}
+          assets = Webconsole::Assets.new(@app)
+
+          assets.call(env)
+
+          Webconsole::Repl.request.env['PATH_INFO'].must_equal '/some_path'
+        end
+
       end
     end
 

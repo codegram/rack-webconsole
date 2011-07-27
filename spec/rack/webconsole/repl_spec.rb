@@ -92,6 +92,13 @@ module Rack
           Webconsole::Repl.token.must_be_kind_of String
         end
       end
+      describe '#request= and #request' do
+        it 'returns the request object' do
+          request = stub
+          Webconsole::Repl.request = request
+          Webconsole::Repl.request.must_equal request
+        end
+      end
     end
 
   end

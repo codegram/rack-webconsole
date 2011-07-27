@@ -35,6 +35,9 @@ module Rack
         # Regenerate the security token
         Webconsole::Repl.reset_token
 
+        # Expose the request object to the Repl
+        Webconsole::Repl.request = Rack::Request.new(env)
+
         # Inject the html, css and js code to the view
         response_body.gsub!('</body>', "#{code}</body>")
 
