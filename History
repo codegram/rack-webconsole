@@ -1,3 +1,7 @@
+=== 0.1.1 / 2011-07-27
+
+  ! Fix bug with Content-Length not being calculated appropriately. (Corin Langosch)
+
 === 0.1.0 / 2011-07-27
 
   + The request object is now exposed in the console through #request method
