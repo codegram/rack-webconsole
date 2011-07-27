@@ -43,6 +43,7 @@ module Rack
 
         JSON.parse(response)['result'].must_equal "32"
         $sandbox.instance_variable_get(:@locals)[:a].must_equal 4
+        $sandbox.instance_variable_get(:@locals).size.must_equal 1
       end
 
       it "returns any found errors prepended with 'Error:'" do
