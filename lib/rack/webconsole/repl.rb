@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'json'
 require 'digest/sha1'
+
 module Rack
   class Webconsole
     # {Repl} is a Rack middleware acting as a Ruby evaluator application.
