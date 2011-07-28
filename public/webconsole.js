@@ -13,7 +13,7 @@ $("#rack-webconsole form input").keyup(function(event) {
 
   if (event.which == 13) {
     /*$.post('/webconsole', $("#rack-webconsole form").serialize());*/
-    var query = $("#query").val();
+    var query = $("#webconsole_query").val();
     $.ajax({
       url: '/webconsole',
       type: 'POST',
@@ -26,7 +26,7 @@ $("#rack-webconsole form input").keyup(function(event) {
         $("#rack-webconsole .results_wrapper").scrollTop(
           $("#rack-webconsole .results").height()
         );
-        $("#query").val('');
+        $("#webconsole_query").val('');
       }
     });
   }
