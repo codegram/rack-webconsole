@@ -33,7 +33,6 @@ $("#rack-webconsole form input").keyup(function(event) {
 });
 
 $(document).ready(function() {
-  $("#rack-webconsole").hide();
   $(this).keypress(function(event) {
     if (event.which == 96) {
       $("#rack-webconsole").slideToggle('fast', function() {
