@@ -27,7 +27,9 @@ protect against cross-site request forgery.
 
 In your Gemfile:
 
-    gem 'rack-webconsole'
+```ruby
+gem 'rack-webconsole'
+```
 
 Rack-webconsole **needs JQuery**. If you are using Rails 3, JQuery is loaded by
 default. In case you don't want to use JQuery in your application,
@@ -35,7 +37,9 @@ default. In case you don't want to use JQuery in your application,
 should put this line somewhere in your application (a Rails initializer, or
 some configuration file):
 
-    Rack::Webconsole.inject_jquery = true
+```ruby
+Rack::Webconsole.inject_jquery = true
+```
 
 ##Usage with Rails 3
 
@@ -48,24 +52,34 @@ the console will show :)
 With Sinatra and Padrino you have to tell your application to use the
 middleware:
 
-    require 'sinatra'
-    require 'rack/webconsole'
+```ruby
+require 'sinatra'
+require 'rack/webconsole'
 
-    class MySinatraApp < Sinatra::Application
-      use Rack::Webconsole
-      # . . .
-    end
+class MySinatraApp < Sinatra::Application
+  use Rack::Webconsole
+  # . . .
+end
 
-    class SamplePadrino < Padrino::Application
-      use Rack::Webconsole
-      # . . .
-    end
+class SamplePadrino < Padrino::Application
+  use Rack::Webconsole
+  # . . .
+end
+```
 
 NOTE: If you are using Bundler and initializing it from config.ru, you don't
 have to `require 'rack/webconsole'` manually, otherwise you have to.
 
 And it works! Fire up the server, go to any page and press the ` ` ` key.
 
+##Usage with Rails 2
+
+You need to add the following code to an intializer (i.e. config/initializers/webconsole.rb):
+
+```ruby
+require 'rack/webconsole'
+ActionController::Dispatcher.middleware.insert_after 1, Rack::Webconsole
+```
 
 ##Commands
 
