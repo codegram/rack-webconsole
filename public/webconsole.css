@@ -38,14 +38,14 @@
   color: #FFF;
 }
 #rack-webconsole form div.results_wrapper{
-  height: 100%;
   width: 100%;
   position: absolute;
   overflow-x: auto;
+  top: 0;
+  bottom: 40px;
 }
 #rack-webconsole form div.results{
   padding: 10px;
-  padding-bottom: 40px;
 }
 #rack-webconsole .prompt{
   width: 30px;
@@ -59,8 +59,6 @@
   width: 100%;
   position: absolute;
   bottom: 0px;
-  height: 30px;
-  padding-top: 10px;
   background: #000;
 }
 #rack-webconsole form div.input input{
@@ -69,6 +67,7 @@
   box-sizing: border-box;
   margin-top: 0px;
   margin-bottom: 0px;
+  padding: 0px;
   width: 100%;
   font-size: 14px;
   background: transparent;
