@@ -44,6 +44,14 @@ module Rack
           '</script>'
       end
 
+      def render(text, variables = {})
+        result_text = text.dup
+        variables.each_pair do |variable, value|
+          result_text.gsub!("$#{variable}", value)
+        end
+        result_text
+      end
+
       private
 
       def asset(file)
