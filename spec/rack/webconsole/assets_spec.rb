@@ -11,10 +11,15 @@ module Rack
       @assets.instance_variable_get(:@app).must_equal @app
     end
 
-    it '#code should inject token' do
+    it '#code should inject token and key_code' do
       Webconsole::Repl.stubs(:token).returns('fake_generated_token')
+      Webconsole.key_code = "96"
+
       @assets = Webconsole::Assets.new(nil)
-      @assets.code.must_match /fake_generated_token/
+      assets_code = @assets.code
+
+      assets_code.must_match /fake_generated_token/
+      assets_code.must_match /event\.which == 96/
     end
 
     describe "#call" do
