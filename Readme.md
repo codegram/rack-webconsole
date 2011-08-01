@@ -41,6 +41,13 @@ some configuration file):
 Rack::Webconsole.inject_jquery = true
 ```
 
+You can also change the javascript key_code used to start webconsole:
+
+```ruby
+ # ` = 96 (default), ^ = 94, ç = 231 ... etc.
+Rack::Webconsole.key_code = "231"
+```
+
 ##Usage with Rails 3
 
 If you are using Rails 3, you have no further steps to do. It works! To give

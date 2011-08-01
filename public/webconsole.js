@@ -19,7 +19,7 @@
         url: '/webconsole',
         type: 'POST',
         dataType: 'json',
-        data: ({query: query, token: "TOKEN"}),
+        data: ({query: query, token: "$TOKEN"}),
         success: function (data) {
           var q = "<div class='query'>" + escapeHTML(">> " + query) + "</div>";
           var r = "<div class='result'>" + escapeHTML("=> " + data.result) + "</div>";
@@ -35,7 +35,7 @@
 
   $(document).ready(function() {
     $(this).keypress(function(event) {
-      if (event.which == 96) {
+      if (event.which == $KEY_CODE) {
         $("#rack-webconsole").slideToggle('fast', function() {
           if ($(this).is(':visible')) {
             $("#rack-webconsole form input").focus();

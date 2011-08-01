@@ -24,21 +24,36 @@ module Rack
   # variables and giving a true IRB-esque experience.
   #
   class Webconsole
-    @@inject_jquery = false
+    @@config = {:inject_jquery => false, :key_code => "96"}
 
     class << self
       # Returns whether the Asset injecter must inject JQuery or not.
       #
       # @return [Boolean] whether to inject JQuery or not.
       def inject_jquery
-        @@inject_jquery
+        @@config[:inject_jquery]
       end
 
       # Sets whether the Asset injecter must inject JQuery or not.
       #
       # @param [Boolean] value whether to inject JQuery or not.
       def inject_jquery=(value)
-        @@inject_jquery = value
+        @@config[:inject_jquery] = value
+      end
+
+      # Returns key code used to start web console.
+      #
+      # @return [String] key code used at keypress event to start web console.
+      def key_code
+        @@config[:key_code]
+      end
+
+      # Sets key code used to start web console.
+      #
+      # @param [String] value key code used at keypress event to start web console.
+      def key_code=(value)
+        value = value.to_s unless value.is_a?(String)
+        @@config[:key_code] = value
       end
     end
 
