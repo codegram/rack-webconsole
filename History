@@ -1,3 +1,10 @@
+=== 0.1.2 / 2011-08-01
+
+  + Change field name to avoid conflicts with other forms (Chris Apolzon)
+  + Prevent visual flash of unstyled content (Rob Cameron)
+  + Fix minor styling issues (Jeff Kreeftmeijer)
+  + Avoid conflicts with libraries other than JQuery (Jo Liss)
+
 === 0.1.1 / 2011-07-27
 
   ! Fix bug with Content-Length not being calculated appropriately. (Corin Langosch)
