@@ -8,8 +8,13 @@ module Rack
     it 'initializes with an app' do
       @app = stub
       @assets = Webconsole::Assets.new(@app)
-
       @assets.instance_variable_get(:@app).must_equal @app
+    end
+
+    it '#code should inject token' do
+      Webconsole::Repl.stubs(:token).returns('fake_generated_token')
+      @assets = Webconsole::Assets.new(nil)
+      @assets.code.must_match /fake_generated_token/
     end
 
     describe "#call" do
