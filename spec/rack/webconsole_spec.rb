@@ -43,5 +43,13 @@ module Rack
         Webconsole.inject_jquery.must_equal true
       end
     end
+    
+    describe 'class methods' do
+      it '#console_password accessors' do
+        Webconsole.console_password.must_equal nil
+        Webconsole.console_password = "test_password_accessor"
+        Webconsole.console_password.must_equal "test_password_accessor"
+      end
+    end
   end
 end

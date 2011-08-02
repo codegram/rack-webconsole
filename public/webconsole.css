@@ -80,3 +80,6 @@
   margin-right: 10px;
   display: block;
 }
+#rack-webconsole form div.input input.hide_query{
+	color: #000;
+}

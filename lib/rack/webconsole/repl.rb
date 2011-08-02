@@ -72,14 +72,28 @@ module Rack
 
           # Force conversion to symbols due to issues with lovely 1.8.7
           boilerplate = local_variables.map(&:to_sym) + [:ls]
-
+          
+          # Replace semicolon to help prevent code injection attacks
+          password = params['query'].delete(';') rescue ''
+          
           result = $sandbox.instance_eval """
-            result = (#{params['query']})
-            ls = (local_variables.map(&:to_sym) - [#{boilerplate.map(&:inspect).join(', ')}])
-            @locals ||= {}
-            @locals.update(ls.inject({}) do |hash, value|
-              hash.update({value => eval(value.to_s)})
-            end)
+            if @password && !authenticated?
+              if authenticate('#{password}')
+                result = 'You have been authenticated.'
+              else
+                result = 'Please enter your console password:'
+              end
+            end
+            
+            if !result
+              result = (#{params['query']})
+              ls = (local_variables.map(&:to_sym) - [#{boilerplate.map(&:inspect).join(', ')}])
+              @locals ||= {}
+              @locals.update(ls.inject({}) do |hash, value|
+                hash.update({value => eval(value.to_s)})
+              end)
+            end
+
             result
           """
 

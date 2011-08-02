@@ -25,7 +25,8 @@ module Rack
   #
   class Webconsole
     @@inject_jquery = false
-
+    @@console_password = nil
+    
     class << self
       # Returns whether the Asset injecter must inject JQuery or not.
       #
@@ -39,6 +40,20 @@ module Rack
       # @param [Boolean] value whether to inject JQuery or not.
       def inject_jquery=(value)
         @@inject_jquery = value
+      end
+
+      # Returns the console_password.
+      #
+      # @return [String] the console password.
+      def console_password
+        @@console_password
+      end
+
+      # Sets the console password.
+      #
+      # @param [String] value representing console password.
+      def console_password=(value)
+        @@console_password = value
       end
     end
 
