@@ -56,7 +56,7 @@ module Rack
       def code
         html_code <<
           css_code <<
-          js_code.gsub('TOKEN', Webconsole::Repl.token)
+          render(js_code, :TOKEN => Webconsole::Repl.token, :KEY_CODE => Webconsole.key_code)
       end
 
       private
