@@ -1,1 +1,1 @@
-rvm --create use ruby-1.9.2@rack-webconsole
+rvm --create use ruby-1.9.3@rack-webconsole
