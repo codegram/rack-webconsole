@@ -24,6 +24,7 @@
 
 	      if (r.search("Please enter your console password") >= 0) {
 		      $("#rack-webconsole form div.input input").addClass("hide_query");
+		      q = "";
 		    }
 	      else if (r.search("You have been authenticated") >= 0) {
 		      $("#rack-webconsole form div.input input").removeClass("hide_query");
