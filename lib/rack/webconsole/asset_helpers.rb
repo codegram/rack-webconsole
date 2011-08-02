@@ -44,12 +44,19 @@ module Rack
           '</script>'
       end
 
-      def render(text, variables = {})
-        result_text = text.dup
+      # Inteprolates the given variables inside the javascrpt code
+      #
+      # @param [String] javascript The javascript code to insert the variables
+      # @param [Hash] variables A hash containing the variables names (as keys)
+      # and its values
+      #
+      # @return [String] the javascript code with the interpolated variables
+      def render(javascript, variables = {})
+        javascript_with_variables = javascript.dup
         variables.each_pair do |variable, value|
-          result_text.gsub!("$#{variable}", value)
+          javascript_with_variables.gsub!("$#{variable}", value)
         end
-        result_text
+        javascript_with_variables
       end
 
       private
