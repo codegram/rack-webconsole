@@ -20,7 +20,7 @@ module Rack
       #
       # @return [TrueClass/FalseClass] the result of the authentication
       def authenticate(password_to_check)
-        return @authenticated = true if password_to_check == @password
+        return @authenticated = (password_to_check == @password)
         return false
       end
 
