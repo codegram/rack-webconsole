@@ -21,7 +21,6 @@ module Rack
       # @return [TrueClass/FalseClass] the result of the authentication
       def authenticate(password_to_check)
         return @authenticated = (password_to_check == @password)
-        return false
       end
 
       # Catches all the undefined local variables and tries to retrieve them
