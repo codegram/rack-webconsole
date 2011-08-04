@@ -1,5 +1,5 @@
 # encoding: utf-8
-require 'json'
+require 'multi_json'
 require 'digest/sha1'
 
 module Rack
@@ -87,7 +87,7 @@ module Rack
         rescue=>e
           "Error: " + e.message
         end
-        response_body = {:result => result}.to_json
+        response_body = MultiJson.encode(:result => result)
         headers = {}
         headers['Content-Type'] = 'application/json'
         headers['Content-Length'] = response_body.bytesize.to_s
