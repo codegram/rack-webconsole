@@ -23,7 +23,7 @@ module Rack
 
         response = @repl.call(env).last.first
 
-        JSON.parse(response)['result'].must_equal "8"
+        MultiJson.decode(response)['result'].must_equal "8"
       end
 
       it 'maintains local state in subsequent calls thanks to an evil global variable' do
@@ -41,7 +41,7 @@ module Rack
 
         response = @repl.call(env).last.first # call 2 retrieves a and multiplies it by 8
 
-        JSON.parse(response)['result'].must_equal "32"
+        MultiJson.decode(response)['result'].must_equal "32"
         $sandbox.instance_variable_get(:@locals)[:a].must_equal 4
         $sandbox.instance_variable_get(:@locals).size.must_equal 1
       end
@@ -56,7 +56,7 @@ module Rack
 
         response = @repl.call(env).last.first
 
-        JSON.parse(response)['result'].must_match /Error:/
+        MultiJson.decode(response)['result'].must_match /Error:/
       end
 
       it 'rejects non-post requests' do
