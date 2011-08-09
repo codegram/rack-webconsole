@@ -1,4 +1,11 @@
 (function($) {
+  
+  var webconsole = {
+    history:[],
+    pointer:0,
+    query:$('#webconsole_query')
+  }
+  
   $('#rack-webconsole form').submit(function(e){
     e.preventDefault();
   });
@@ -12,25 +19,53 @@
       );
     };
 
+    // enter
     if (event.which == 13) {
-      /*$.post('/webconsole', $("#rack-webconsole form").serialize());*/
-      var query = $("#webconsole_query").val();
+      webconsole.history.push(webconsole.query.val());
+      webconsole.pointer = webconsole.history.length - 1;
       $.ajax({
         url: '/webconsole',
         type: 'POST',
         dataType: 'json',
-        data: ({query: query, token: "$TOKEN"}),
+        data: ({query: webconsole.query.val(), token: "$TOKEN"}),
         success: function (data) {
-          var q = "<div class='query'>" + escapeHTML(">> " + query) + "</div>";
+          var q = "<div class='query'>" + escapeHTML(">> " + webconsole.query.val()) + "</div>";
           var r = "<div class='result'>" + escapeHTML("=> " + data.result) + "</div>";
           $("#rack-webconsole .results").append(q + r);
           $("#rack-webconsole .results_wrapper").scrollTop(
             $("#rack-webconsole .results").height()
           );
-          $("#webconsole_query").val('');
+          webconsole.query.val('');
         }
       });
     }
+    
+    // up
+    if (event.which == 38) {
+      if (webconsole.pointer < 0) {
+        webconsole.query.val('');
+      } else {
+        if (webconsole.pointer == webconsole.history.length) {
+          webconsole.pointer = webconsole.history.length - 1;
+        }
+        webconsole.query.val(webconsole.history[webconsole.pointer]);
+        webconsole.pointer--;
+      }
+    }
+    
+    // down
+    if (event.which == 40) {
+      if (webconsole.pointer == webconsole.history.length) {
+        webconsole.query.val('');
+      } else {
+        if (webconsole.pointer < 0) {
+          webconsole.pointer = 0;
+        }
+        webconsole.query.val(webconsole.history[webconsole.pointer]);
+        webconsole.pointer++;
+      }
+    }
+    
   });
 
   $(document).ready(function() {
