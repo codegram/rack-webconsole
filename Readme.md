@@ -1,4 +1,4 @@
-#rack-webconsole
+#rack-webconsole [![Build Status](https://secure.travis-ci.org/codegram/rack-webconsole.png)](https://secure.travis-ci.org/codegram/rack-webconsole.png])
 
 Rack-webconsole is a Rack-based interactive console (à la Rails console) in
 your web application's frontend. That means you can interact with your
