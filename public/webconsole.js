@@ -18,17 +18,17 @@
     );
   };
 
-	function performCall() {
-	  webconsole.history.push(webconsole.query.val());
-	  webconsole.pointer = webconsole.history.length - 1;
-	  $.ajax({
-	    url: '/webconsole',
-	    type: 'POST',
-	    dataType: 'json',
-	    data: ({query: webconsole.query.val(), token: "$TOKEN"}),
-	    success: function (data) {
-	      var q = "<div class='query'>" + escapeHTML(">> " + webconsole.query.val()) + "</div>";
-	      var r = "<div class='result'>" + escapeHTML("=> " + data.result) + "</div>";
+  function performCall() {
+    webconsole.history.push(webconsole.query.val());
+    webconsole.pointer = webconsole.history.length - 1;
+    $.ajax({
+      url: '/webconsole',
+      type: 'POST',
+      dataType: 'json',
+      data: ({query: webconsole.query.val(), token: "$TOKEN"}),
+      success: function (data) {
+        var q = "<div class='query'>" + escapeHTML(">> " + webconsole.query.val()) + "</div>";
+        var r = "<div class='result'>" + escapeHTML("=> " + data.result) + "</div>";
 
         if (r.search("Please enter your console password") >= 0) {
           $("#rack-webconsole form div.input input").addClass("hide_query");
@@ -37,16 +37,16 @@
         else if (r.search("You have been authenticated") >= 0) {
           $("#rack-webconsole form div.input input").removeClass("hide_query");
           q = "";
-        };	      
+        };        
 
-	      $("#rack-webconsole .results").append(q + r);
-	      $("#rack-webconsole .results_wrapper").scrollTop(
-	        $("#rack-webconsole .results").height()
-	      );
-	      webconsole.query.val('');
-	    }
-	  });
-	};
+        $("#rack-webconsole .results").append(q + r);
+        $("#rack-webconsole .results_wrapper").scrollTop(
+          $("#rack-webconsole .results").height()
+        );
+        webconsole.query.val('');
+      }
+    });
+  };
 
   $("#rack-webconsole form input").keyup(function(event) {
     // enter
