@@ -67,26 +67,8 @@ module Rack
 
         return [status, headers, response] unless check_legitimate(req)
 
-        result = begin
-          $sandbox ||= Sandbox.new
-
-          # Force conversion to symbols due to issues with lovely 1.8.7
-          boilerplate = local_variables.map(&:to_sym) + [:ls]
-
-          result = $sandbox.instance_eval """
-            result = (#{params['query']})
-            ls = (local_variables.map(&:to_sym) - [#{boilerplate.map(&:inspect).join(', ')}])
-            @locals ||= {}
-            @locals.update(ls.inject({}) do |hash, value|
-              hash.update({value => eval(value.to_s)})
-            end)
-            result
-          """
-
-          result.inspect
-        rescue=>e
-          "Error: " + e.message
-        end
+        $sandbox ||= Sandbox.new
+        result = Shell.eval_query params['query']
         response_body = MultiJson.encode(:result => result)
         headers = {}
         headers['Content-Type'] = 'application/json'
