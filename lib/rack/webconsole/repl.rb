@@ -69,7 +69,10 @@ module Rack
 
         $sandbox ||= Sandbox.new
         result = Shell.eval_query params['query']
-        response_body = MultiJson.encode(:result => result)
+        response_body = MultiJson.encode(:result => result,
+          :multi_line => Ripl.shell.multi_line?,
+          :previous_multi_line => Ripl.shell.previous_multi_line?,
+          :prompt => Ripl.shell.previous_multi_line? ? "|| " : ">> ")
         headers = {}
         headers['Content-Type'] = 'application/json'
         headers['Content-Length'] = response_body.bytesize.to_s

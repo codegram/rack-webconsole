@@ -8,7 +8,17 @@ class Rack::Webconsole
       Ripl.shell.return_result
     end
 
+    # TODO: move to plugin
+    def multi_line?
+      @buffer.is_a?(Array)
+    end
+
+    def previous_multi_line?
+      @old_buffer.is_a?(Array)
+    end
+
     def get_input
+      @old_buffer = @buffer
       history << @input
       @input
     end
