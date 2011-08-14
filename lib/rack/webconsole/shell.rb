@@ -25,7 +25,7 @@ class Rack::Webconsole
 
     def loop_eval(query)
       # Force conversion to symbols due to issues with lovely 1.8.7
-      boilerplate = local_variables.map(&:to_sym) + [:ls]
+      boilerplate = local_variables.map(&:to_sym) + [:ls, :result]
 
       $sandbox.instance_eval """
         result = (#{query})
