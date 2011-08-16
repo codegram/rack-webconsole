@@ -13,7 +13,7 @@ module Rack
       
       # @return [TrueClass/FalseClass] is the current console user authenticated?
       def authenticated?
-        @authenticated == true || @password.nil?
+        @authenticated
       end
       
       # Authenticates the password passed from the console.
