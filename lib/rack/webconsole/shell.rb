@@ -3,6 +3,9 @@ require 'ripl'
 class Rack::Webconsole
   module Shell
     def self.eval_query(query)
+      # Initialize ripl plugins
+      @before_loop_called ||= Ripl.shell.before_loop
+
       Ripl.shell.input = query
       Ripl.shell.loop_once
       {}.tap do |hash|
@@ -52,9 +55,7 @@ class Rack::Webconsole
       @error_raised ? result : result.inspect
     end
 
-    # Disable unused callbacks
     def print_result(result) end
-    def before_loop() end
   end
 end
 
@@ -62,11 +63,12 @@ end
 Ripl.config[:readline] = false
 Ripl.config[:multi_line_prompt] = '|| '
 Ripl.config[:prompt] = '>> '
+Ripl.config[:irbrc] = false
 # Let ripl users detect web shells
 Ripl.config[:web] = true
 
 Ripl::Shell.include Rack::Webconsole::Shell
 # must come after Webconsole plugin
 require 'ripl/multi_line'
-# Initialize ripl plugins
-Ripl.shell.before_loop
+
+at_exit { Ripl.shell.after_loop }
