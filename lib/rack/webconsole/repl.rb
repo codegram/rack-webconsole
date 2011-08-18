@@ -68,11 +68,8 @@ module Rack
         return [status, headers, response] unless check_legitimate(req)
 
         $sandbox ||= Sandbox.new
-        result = Shell.eval_query params['query']
-        response_body = MultiJson.encode(:result => result,
-          :multi_line => Ripl.shell.multi_line?,
-          :previous_multi_line => Ripl.shell.previous_multi_line?,
-          :prompt => Ripl.shell.previous_multi_line? ? "|| " : ">> ")
+        hash = Shell.eval_query params['query']
+        response_body = MultiJson.encode(hash)
         headers = {}
         headers['Content-Type'] = 'application/json'
         headers['Content-Length'] = response_body.bytesize.to_s

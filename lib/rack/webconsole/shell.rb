@@ -5,7 +5,13 @@ class Rack::Webconsole
     def self.eval_query(query)
       Ripl.shell.input = query
       Ripl.shell.loop_once
-      Ripl.shell.return_result
+      {}.tap do |hash|
+        hash[:result] = Ripl.shell.return_result
+        hash[:multi_line] = Ripl.shell.multi_line?
+        hash[:previous_multi_line] = Ripl.shell.previous_multi_line?
+        hash[:prompt] = Ripl.shell.previous_multi_line? ?
+          Ripl.config[:multi_line_prompt] : Ripl.config[:prompt]
+      end
     end
 
     # TODO: move to plugin
@@ -54,8 +60,11 @@ end
 
 # Disable readline's #get_input
 Ripl.config[:readline] = false
+Ripl.config[:multi_line_prompt] = '|| '
+Ripl.config[:prompt] = '>> '
 # Let ripl users detect web shells
 Ripl.config[:web] = true
+
 Ripl::Shell.include Rack::Webconsole::Shell
 # must come after Webconsole plugin
 require 'ripl/multi_line'
