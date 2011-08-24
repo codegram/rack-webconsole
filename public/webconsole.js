@@ -10,34 +10,48 @@
     e.preventDefault();
   });
 
-  $("#rack-webconsole form input").keyup(function(event) {
-    function escapeHTML(string) {
-      return(string.replace(/&/g,'&amp;').
-        replace(/>/g,'&gt;').
-        replace(/</g,'&lt;').
-        replace(/"/g,'&quot;')
-      );
-    };
+  function escapeHTML(string) {
+    return(string.replace(/&/g,'&amp;').
+      replace(/>/g,'&gt;').
+      replace(/</g,'&lt;').
+      replace(/"/g,'&quot;')
+    );
+  };
 
+  function performCall() {
+    webconsole.history.push(webconsole.query.val());
+    webconsole.pointer = webconsole.history.length - 1;
+    $.ajax({
+      url: '/webconsole',
+      type: 'POST',
+      dataType: 'json',
+      data: ({query: webconsole.query.val(), token: "$TOKEN"}),
+      success: function (data) {
+        var q = "<div class='query'>" + escapeHTML(">> " + webconsole.query.val()) + "</div>";
+        var r = "<div class='result'>" + escapeHTML("=> " + data.result) + "</div>";
+
+        if (r.search("Please enter your console password") >= 0) {
+          $("#rack-webconsole form div.input input").addClass("hide_query");
+          q = "";
+        }
+        else if (r.search("You have been authenticated") >= 0) {
+          $("#rack-webconsole form div.input input").removeClass("hide_query");
+          q = "";
+        };        
+
+        $("#rack-webconsole .results").append(q + r);
+        $("#rack-webconsole .results_wrapper").scrollTop(
+          $("#rack-webconsole .results").height()
+        );
+        webconsole.query.val('');
+      }
+    });
+  };
+
+  $("#rack-webconsole form input").keyup(function(event) {
     // enter
     if (event.which == 13) {
-      webconsole.history.push(webconsole.query.val());
-      webconsole.pointer = webconsole.history.length - 1;
-      $.ajax({
-        url: '/webconsole',
-        type: 'POST',
-        dataType: 'json',
-        data: ({query: webconsole.query.val(), token: "$TOKEN"}),
-        success: function (data) {
-          var q = "<div class='query'>" + escapeHTML(">> " + webconsole.query.val()) + "</div>";
-          var r = "<div class='result'>" + escapeHTML("=> " + data.result) + "</div>";
-          $("#rack-webconsole .results").append(q + r);
-          $("#rack-webconsole .results_wrapper").scrollTop(
-            $("#rack-webconsole .results").height()
-          );
-          webconsole.query.val('');
-        }
-      });
+      performCall(); 
     }
     
     // up
@@ -82,7 +96,9 @@
           }
         });
         event.preventDefault();
+        performCall(); 
       }
     });
   });
 })(jQuery);
+

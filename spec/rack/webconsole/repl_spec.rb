@@ -84,6 +84,45 @@ module Rack
 
         @repl.call(env).must_equal @app.call(env)
       end
+
+      it 'asks for a password when a console password is set' do
+        $sandbox = Webconsole::Sandbox.new(:console_password => "test_password")
+
+        @app = lambda { |env| [200, {'Content-Type' => 'text/plain'}, ['hello world']] }
+        env = {}
+        Webconsole::Repl.stubs(:token).returns('abc')
+        request = OpenStruct.new(:params => {'query' => 'a = 4', 'token' => 'abc'}, :post? => true)
+        Rack::Request.stubs(:new).returns request
+        @repl = Webconsole::Repl.new(@app)
+
+        response = @repl.call(env).last.first
+
+        $sandbox = nil
+    
+        JSON.parse(response)['result'].must_equal "\"Please enter your console password:\""
+      end
+
+      it 'will evaluate a query once the console user is authenticated' do
+        $sandbox = Webconsole::Sandbox.new(:console_password => "test_password")
+
+        @app = lambda { |env| [200, {'Content-Type' => 'text/plain'}, ['hello world']] }
+        env = {}
+        Webconsole::Repl.stubs(:token).returns('abc')
+        request = OpenStruct.new(:params => {'query' => 'test_password', 'token' => 'abc'}, :post? => true)
+        Rack::Request.stubs(:new).returns request
+        @repl = Webconsole::Repl.new(@app)
+
+        response = @repl.call(env).last.first
+
+        request = OpenStruct.new(:params => {'query' => 'a = 4; a * 2', 'token' => 'abc'}, :post? => true)
+        Rack::Request.stubs(:new).returns request
+
+        response = @repl.call(env).last.first
+
+        $sandbox = nil
+
+        JSON.parse(response)['result'].must_equal "8"
+      end
     end
 
     describe 'class methods' do

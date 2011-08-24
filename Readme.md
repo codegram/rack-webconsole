@@ -95,6 +95,14 @@ In the console you can issue whatever Ruby commands you want, except multiline c
 * `reload!` resets all local variables
 * `request` returns the current page request object
 
+##Console Password
+
+If you wish to require a password when using rack-webconsole, include the following in one of your project's environment files:
+
+```ruby
+Rack::Webconsole.console_password = "some_password"
+```
+
 ##Under the hood
 
 Run the test suite by typing:
