@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/floehopper/mocha.git
+  revision: ab6e3c6a6a3974d4a0e54ecde024eade831219fd
+  specs:
+    mocha (0.9.12)
+      metaclass (~> 0.0.1)
+
 PATH
   remote: .
   specs:
@@ -12,8 +19,8 @@ GEM
   specs:
     bluecloth (2.1.0)
     bond (0.4.1)
+    metaclass (0.0.1)
     minitest (2.3.1)
-    mocha (0.9.12)
     multi_json (1.0.3)
     purdytest (1.0.0)
       minitest (~> 2.2)
@@ -32,7 +39,7 @@ PLATFORMS
 DEPENDENCIES
   bluecloth
   minitest
-  mocha
+  mocha!
   purdytest
   rack-webconsole!
   rake
