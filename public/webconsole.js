@@ -29,9 +29,13 @@
         dataType: 'json',
         data: ({query: webconsole.query.val(), token: "$TOKEN"}),
         success: function (data) {
-          var q = "<div class='query'>" + escapeHTML(">> " + webconsole.query.val()) + "</div>";
-          var r = "<div class='result'>" + escapeHTML("=> " + data.result) + "</div>";
-          $("#rack-webconsole .results").append(q + r);
+          var query_class = data.previous_multi_line ? 'query_multiline' : 'query';
+          var result = "<div class='" + query_class + "'>" +
+            escapeHTML(data.prompt + webconsole.query.val()) + "</div>";
+          if (!data.multi_line) {
+            result += "<div class='result'>" + escapeHTML("=> " + data.result) + "</div>";
+          }
+          $("#rack-webconsole .results").append(result);
           $("#rack-webconsole .results_wrapper").scrollTop(
             $("#rack-webconsole .results").height()
           );
