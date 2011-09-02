@@ -84,7 +84,9 @@ module Rack
           """
 
           result.inspect
-        rescue=>e
+        rescue ScriptError => e
+          "Error: " + e.message
+        rescue StandardError => e
           "Error: " + e.message
         end
         response_body = MultiJson.encode(:result => result)
