@@ -1,11 +1,11 @@
 (function($) {
-  
+
   var webconsole = {
     history:[],
     pointer:0,
     query:$('#webconsole_query')
   }
-  
+
   $('#rack-webconsole form').submit(function(e){
     e.preventDefault();
   });
@@ -39,7 +39,7 @@
         }
       });
     }
-    
+
     // up
     if (event.which == 38) {
       if (webconsole.pointer < 0) {
@@ -52,7 +52,7 @@
         webconsole.pointer--;
       }
     }
-    
+
     // down
     if (event.which == 40) {
       if (webconsole.pointer == webconsole.history.length) {
@@ -65,7 +65,7 @@
         webconsole.pointer++;
       }
     }
-    
+
   });
 
   $(document).ready(function() {
