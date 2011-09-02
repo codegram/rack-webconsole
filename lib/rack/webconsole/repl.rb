@@ -67,7 +67,7 @@ module Rack
 
         return [status, headers, response] unless check_legitimate(req)
 
-        result = begin
+        status, result = begin
           $sandbox ||= Sandbox.new
 
           # Force conversion to symbols due to issues with lovely 1.8.7
@@ -83,18 +83,18 @@ module Rack
             result
           """
 
-          result.inspect
+          [200, result.inspect]
         rescue ScriptError => e
-          "Error: " + e.message
+          [400, "Error: #{e.message}"]
         rescue StandardError => e
-          "Error: " + e.message
+          [400, "Error: #{e.message}"]
         end
 
         response_body = MultiJson.encode(:result => result)
         headers = {}
         headers['Content-Type'] = 'application/json'
         headers['Content-Length'] = response_body.bytesize.to_s
-        [200, headers, [response_body]]
+        [status, headers, [response_body]]
       end
 
       private

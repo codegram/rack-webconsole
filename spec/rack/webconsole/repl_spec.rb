@@ -72,6 +72,34 @@ module Rack
         MultiJson.decode(response)['result'].must_match /Error:/
       end
 
+      it 'should respond with appropriate status code when everything is fine' do
+        @app = lambda { |env| [200, {'Content-Type' => 'text/plain'}, ['hello world']] }
+        env = {}
+        Webconsole::Repl.stubs(:token).returns('abc')
+        request = OpenStruct.new(:params => {'query' => '2 + 2', 'token' => 'abc'}, :post? => true)
+        Rack::Request.stubs(:new).returns request
+        @repl = Webconsole::Repl.new(@app)
+
+        response = @repl.call(env)
+        status = response.first
+
+        status.must_equal 200
+      end
+
+      it 'should respond with appropriate status code when returning an error' do
+        @app = lambda { |env| [200, {'Content-Type' => 'text/plain'}, ['hello world']] }
+        env = {}
+        Webconsole::Repl.stubs(:token).returns('abc')
+        request = OpenStruct.new(:params => {'query' => 'unknown_method', 'token' => 'abc'}, :post? => true)
+        Rack::Request.stubs(:new).returns request
+        @repl = Webconsole::Repl.new(@app)
+
+        response = @repl.call(env)
+        status = response.first
+
+        status.must_equal 400
+      end
+
       it 'rejects non-post requests' do
         @app = lambda { |env| [200, {'Content-Type' => 'text/plain'}, ['hello world']] }
         env = {}

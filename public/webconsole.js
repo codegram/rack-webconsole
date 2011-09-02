@@ -28,14 +28,21 @@
         type: 'POST',
         dataType: 'json',
         data: ({query: webconsole.query.val(), token: "$TOKEN"}),
-        success: function (data) {
-          var q = "<div class='query'>" + escapeHTML(">> " + webconsole.query.val()) + "</div>";
-          var r = "<div class='result'>" + escapeHTML("=> " + data.result) + "</div>";
-          $("#rack-webconsole .results").append(q + r);
+        complete: function (data) {
           $("#rack-webconsole .results_wrapper").scrollTop(
             $("#rack-webconsole .results").height()
           );
           webconsole.query.val('');
+        },
+        error: function (data) {
+          var q = "<div class='query'>" + escapeHTML(">> " + webconsole.query.val()) + "</div>";
+          var r = "<div class='error-result result'>" + escapeHTML("=> " + data.result) + "</div>";
+          $("#rack-webconsole .results").append(q + r);
+        },
+        success: function (data) {
+          var q = "<div class='query'>" + escapeHTML(">> " + webconsole.query.val()) + "</div>";
+          var r = "<div class='result'>" + escapeHTML("=> " + data.result) + "</div>";
+          $("#rack-webconsole .results").append(q + r);
         }
       });
     }
