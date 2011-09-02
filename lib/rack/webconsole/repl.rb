@@ -89,6 +89,7 @@ module Rack
         rescue StandardError => e
           "Error: " + e.message
         end
+
         response_body = MultiJson.encode(:result => result)
         headers = {}
         headers['Content-Type'] = 'application/json'
