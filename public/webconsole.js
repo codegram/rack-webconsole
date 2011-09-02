@@ -4,7 +4,7 @@
     history:[],
     pointer:0,
     query:$('#webconsole_query')
-  }
+  };
 
   $('#rack-webconsole form').submit(function(e){
     e.preventDefault();
