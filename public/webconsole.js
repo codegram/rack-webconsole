@@ -28,18 +28,18 @@
         type: 'POST',
         dataType: 'json',
         data: ({query: webconsole.query.val(), token: "$TOKEN"}),
-        complete: function (data) {
+        complete: function (jqXHR, textStatus) {
           $("#rack-webconsole .results_wrapper").scrollTop(
             $("#rack-webconsole .results").height()
           );
           webconsole.query.val('');
         },
-        error: function (data) {
+        error: function (jqXHR, textStatus, errorThrown) {
           var q = "<div class='query'>" + escapeHTML(">> " + webconsole.query.val()) + "</div>";
-          var r = "<div class='error-result result'>" + escapeHTML("=> " + data.result) + "</div>";
+          var r = "<div class='error-result result'>" + escapeHTML("=> " + jQuery.parseJSON(jqXHR.response).result) + "</div>";
           $("#rack-webconsole .results").append(q + r);
         },
-        success: function (data) {
+        success: function (data, textStatus, jqXHR) {
           var q = "<div class='query'>" + escapeHTML(">> " + webconsole.query.val()) + "</div>";
           var r = "<div class='result'>" + escapeHTML("=> " + data.result) + "</div>";
           $("#rack-webconsole .results").append(q + r);
