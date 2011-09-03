@@ -84,9 +84,7 @@ module Rack
           """
 
           [200, result.inspect]
-        rescue ScriptError => e
-          [400, "Error: #{e.message}"]
-        rescue StandardError => e
+        rescue Exception => e
           [400, "Error: #{e.message}"]
         end
 
