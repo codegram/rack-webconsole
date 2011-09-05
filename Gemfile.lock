@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/floehopper/mocha.git
-  revision: ab6e3c6a6a3974d4a0e54ecde024eade831219fd
+  revision: 309d450b822bc37ffd15a291a9db7e24cb5a4517
   specs:
     mocha (0.9.12)
       metaclass (~> 0.0.1)
@@ -20,7 +20,7 @@ GEM
     bluecloth (2.1.0)
     bond (0.4.1)
     metaclass (0.0.1)
-    minitest (2.3.1)
+    minitest (2.5.1)
     multi_json (1.0.3)
     purdytest (1.0.0)
       minitest (~> 2.2)

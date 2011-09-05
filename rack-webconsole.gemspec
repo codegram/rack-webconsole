@@ -20,7 +20,12 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'minitest'
   s.add_development_dependency 'purdytest'
-  s.add_development_dependency 'mocha'
+
+  # Since we can't have a git dependency in gemspec, we specify this
+  # dependency directly in the Gemfile. Once a new mocha version is released,
+  # we should uncomment this line and remove mocha from the Gemfile.
+  # s.add_development_dependency 'mocha'
+
   s.add_development_dependency 'yard'
   s.add_development_dependency 'bluecloth'
   s.add_development_dependency 'rake'
