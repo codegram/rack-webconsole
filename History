@@ -1,3 +1,9 @@
+=== 0.1.3 / 2012-03-22
+
+  + Make keycode configurable (Roger Leite)
+  + Switch to multi_json (Josh Buddy)
+  ! Fix markup to make it work in more browsers
+
 === 0.1.2 / 2011-08-01
 
   + Change field name to avoid conflicts with other forms (Chris Apolzon)
