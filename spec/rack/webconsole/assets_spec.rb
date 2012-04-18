@@ -12,16 +12,18 @@ module Rack
     end
 
     describe "#code" do
-      it 'injects the token and key_code' do
+      it 'injects the token, key_code, and context path' do
         Webconsole::Repl.stubs(:token).returns('fake_generated_token')
         Webconsole.key_code = "96"
 
         @assets = Webconsole::Assets.new(nil)
-        assets_code = @assets.code
+        assets_code = @assets.code('SCRIPT_NAME' => '/hambiscuit')
 
         assets_code.must_match /fake_generated_token/
         assets_code.must_match /event\.which == 96/
+        assets_code.must_match %r{/hambiscuit/webconsole}
       end
+
     end
 
     describe "#call" do
