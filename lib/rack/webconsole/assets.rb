@@ -39,7 +39,7 @@ module Rack
         Webconsole::Repl.request = Rack::Request.new(env)
 
         # Inject the html, css and js code to the view
-        response_body.gsub!('</body>', "#{code}</body>")
+        response_body.gsub!('</body>', "#{code(env)}</body>")
 
         headers['Content-Length'] = response_body.bytesize.to_s
 
@@ -53,10 +53,13 @@ module Rack
       # secure.
       #
       # @return [String] the injectable code.
-      def code
+      def code(env)
         html_code <<
           css_code <<
-          render(js_code, :TOKEN => Webconsole::Repl.token, :KEY_CODE => Webconsole.key_code)
+          render(js_code,
+                 :TOKEN => Webconsole::Repl.token,
+                 :KEY_CODE => Webconsole.key_code,
+                 :CONTEXT => env['SCRIPT_NAME'] || "")
       end
 
       private
