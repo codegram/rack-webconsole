@@ -24,7 +24,7 @@
       webconsole.history.push(webconsole.query.val());
       webconsole.pointer = webconsole.history.length - 1;
       $.ajax({
-        url: '/webconsole',
+        url: '$CONTEXT/webconsole',
         type: 'POST',
         dataType: 'json',
         data: ({query: webconsole.query.val(), token: "$TOKEN"}),
