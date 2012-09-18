@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.rubyforge_project = "rack-webconsole"
 
   s.add_runtime_dependency 'rack'
-  s.add_runtime_dependency 'multi_json', '~> 1.0.3'
+  s.add_runtime_dependency 'multi_json', '>= 1.0.3', '~> 1.0'
   s.add_runtime_dependency 'ripl', '~> 0.5.1'
   s.add_runtime_dependency 'ripl-multi_line', '~> 0.3.0'
 
