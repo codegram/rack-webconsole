@@ -65,10 +65,10 @@ module Rack
       private
 
       def check_html?(headers, response)
+        return false unless headers['Content-Type'] && headers['Content-Type'].include?('text/html')
+
         body = response.respond_to?(:body) ? response.body : response.first
-        headers['Content-Type'] and
-          headers['Content-Type'].include? 'text/html' and
-          body =~ %r{<html.*</html>}m
+        body =~ %r{<html.*</html>}m
       end
     end
   end
