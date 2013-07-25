@@ -26,11 +26,7 @@ module Rack
         status, headers, response = @app.call(env)
         return [status, headers, response] unless check_html?(headers, response) && status == 200
 
-        if response.respond_to?(:body)
-          response_body = response.body
-        else
-          response_body = response.first
-        end
+        response_body = full_body(response)
 
         # Regenerate the security token
         Webconsole::Repl.reset_token
@@ -67,8 +63,13 @@ module Rack
       def check_html?(headers, response)
         return false unless headers['Content-Type'] && headers['Content-Type'].include?('text/html')
 
-        body = response.respond_to?(:body) ? response.body : response.first
-        body =~ %r{<html.*</html>}m
+        full_body(response) =~ %r{<html.*</html>}m
+      end
+
+      def full_body(response)
+        response_body = ""
+        response.each { |part| response_body << part }
+        response_body
       end
     end
   end
