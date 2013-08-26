@@ -54,7 +54,7 @@ module Rack
 
           valid_html = "<!DOCTYPE html>\n<html>\n<head>\n  <title>Testapp</title>\n  <link href=\"/assets/application.css\" media=\"screen\" rel=\"stylesheet\" type=\"text/css\" />\n  <script src=\"/assets/application.js\" type=\"text/javascript\"></script>\n  <meta content=\"authenticity_token\" name=\"csrf-param\" />\n<meta content=\"26Ls63zdKBiCXoqU5CuG6KqVbeMYydRqOuovP+DXx8g=\" name=\"csrf-token\" />\n</head>\n<body>\n\n<h1> Hello bitches </h1>\n\n<p> Lorem ipsum dolor sit amet. </p>\n\n\n</body>\n</html>\n"
 
-          html = [valid_html]
+          html = valid_html.split(//)
 
           @app = lambda { |env| [200, {'Content-Type' => 'text/html'}, html] }
 
@@ -66,25 +66,10 @@ module Rack
           response.must_match /escapeHTML/m # js
         end
 
-        it "works with Rails' particular conception of what a response is" do
-
-          valid_html = "<!DOCTYPE html>\n<html>\n<head>\n  <title>Testapp</title>\n  <link href=\"/assets/application.css\" media=\"screen\" rel=\"stylesheet\" type=\"text/css\" />\n  <script src=\"/assets/application.js\" type=\"text/javascript\"></script>\n  <meta content=\"authenticity_token\" name=\"csrf-param\" />\n<meta content=\"26Ls63zdKBiCXoqU5CuG6KqVbeMYydRqOuovP+DXx8g=\" name=\"csrf-token\" />\n</head>\n<body>\n\n<h1> Hello bitches </h1>\n\n<p> Lorem ipsum dolor sit amet. </p>\n\n\n</body>\n</html>\n"
-
-          @app = lambda { |env| [200, {'Content-Type' => 'text/html'}, OpenStruct.new({:body => valid_html})] }
-
-          assets = Webconsole::Assets.new(@app)
-
-          response = assets.call({}).last.first
-
-          response.must_match /input name/m # html
-          response.must_match /text\/css/m # css
-          response.must_match /escapeHTML/m # js
-        end
-
         it 'exposes the request object to the console' do
           valid_html = "<!DOCTYPE html>\n<html>\n<head>\n  <title>Testapp</title>\n  <link href=\"/assets/application.css\" media=\"screen\" rel=\"stylesheet\" type=\"text/css\" />\n  <script src=\"/assets/application.js\" type=\"text/javascript\"></script>\n  <meta content=\"authenticity_token\" name=\"csrf-param\" />\n<meta content=\"26Ls63zdKBiCXoqU5CuG6KqVbeMYydRqOuovP+DXx8g=\" name=\"csrf-token\" />\n</head>\n<body>\n\n<h1> Hello bitches </h1>\n\n<p> Lorem ipsum dolor sit amet. </p>\n\n\n</body>\n</html>\n"
 
-          @app = lambda { |env| [200, {'Content-Type' => 'text/html'}, OpenStruct.new({:body => valid_html})] }
+          @app = lambda { |env| [200, {'Content-Type' => 'text/html'}, [valid_html]] }
 
           env = {'PATH_INFO' => '/some_path'}
           assets = Webconsole::Assets.new(@app)
