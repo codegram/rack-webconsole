@@ -51,7 +51,7 @@ Rack::Webconsole.key_code = "231"
 ##Usage with Rails 3
 
 If you are using Rails 3, you have no further steps to do. It works! To give
-it a try, fire up the Rails server and go to any page, press the ` ` ` key and
+it a try, fire up the Rails server and go to any page, press the <code>`</code> key and
 the console will show :)
 
 ##Usage with Sinatra/Padrino
@@ -77,7 +77,7 @@ end
 NOTE: If you are using Bundler and initializing it from config.ru, you don't
 have to `require 'rack/webconsole'` manually, otherwise you have to.
 
-And it works! Fire up the server, go to any page and press the ` ` ` key.
+And it works! Fire up the server, go to any page and press the <code>`</code> key.
 
 ##Usage with Rails 2
 
