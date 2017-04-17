@@ -1,4 +1,4 @@
-#rack-webconsole [![Build Status](http://travis-ci.org/codegram/rack-webconsole.png)](http://travis-ci.org/codegram/rack-webconsole.png)
+# rack-webconsole [![Build Status](http://travis-ci.org/codegram/rack-webconsole.png)](http://travis-ci.org/codegram/rack-webconsole.png)
 
 Rack-webconsole is a Rack-based interactive console (à la Rails console) in
 your web application's frontend. That means you can interact with your
@@ -17,13 +17,13 @@ Tested with MRI versions 1.8.7, 1.9.2, ruby-head, and JRuby 1.6.3.
 **SECURITY NOTE**: From version v0.0.5 rack-webconsole uses a token system to
 protect against cross-site request forgery.
 
-##Resources
+## Resources
 
 * [Example video](http://youtu.be/yKK5J01Dqts?hd=1)
 * [Documentation](http://rubydoc.info/github/codegram/rack-webconsole)
 
 
-##Install
+## Install
 
 In your Gemfile:
 
@@ -48,13 +48,13 @@ You can also change the javascript key_code used to start webconsole:
 Rack::Webconsole.key_code = "231"
 ```
 
-##Usage with Rails 3
+## Usage with Rails 3
 
 If you are using Rails 3, you have no further steps to do. It works! To give
 it a try, fire up the Rails server and go to any page, press the ` ` ` key and
 the console will show :)
 
-##Usage with Sinatra/Padrino
+## Usage with Sinatra/Padrino
 
 With Sinatra and Padrino you have to tell your application to use the
 middleware:
@@ -79,7 +79,7 @@ have to `require 'rack/webconsole'` manually, otherwise you have to.
 
 And it works! Fire up the server, go to any page and press the ` ` ` key.
 
-##Usage with Rails 2
+## Usage with Rails 2
 
 You need to add the following code to an intializer (i.e. config/initializers/webconsole.rb):
 
@@ -88,14 +88,14 @@ require 'rack/webconsole'
 ActionController::Dispatcher.middleware.insert_after 1, Rack::Webconsole
 ```
 
-##Commands
+## Commands
 
 In the console you can issue whatever Ruby commands you want, except multiline commands. Local variables are kept, so you can get a more IRB-esque feeling.
 
 * `reload!` resets all local variables
 * `request` returns the current page request object
 
-##Under the hood
+## Under the hood
 
 Run the test suite by typing:
 
